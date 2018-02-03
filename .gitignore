@@ -12,3 +12,11 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
+# gradle
+.gradle
+examples/gradle/.gradle
+examples/gradle/build/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache

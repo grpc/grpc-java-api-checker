@@ -15,8 +15,8 @@ buildNumber.properties
 
 # gradle
 .gradle
-examples/gradle/.gradle
-examples/gradle/build/
+examples/.gradle
+examples/build/
 gradle-app.setting
 !gradle-wrapper.jar
 .gradletasknamecache

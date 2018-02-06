@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/grpc/grpc-java-api-checker.svg?branch=master)](https://travis-ci.org/grpc/grpc-java-api-checker)
 
-An Error Prone plugin that checks for usages of grpc-java APIs that are annotated with `@ExperimentalApi` or `@Internal` annotation.
+An Error Prone plugin that checks for usages of grpc-java APIs that are annotated with `@ExperimentalApi` or `@Internal`.
 
-**NOTE: Currently grpc-java-api-checker does not work. But you can use this with HEAD of grpc-java. This problem will be fixed by grpc-java `1.10.0`.**
+**NOTE: grpc-java-api-checker works with grpc-java version 1.10.0 or greater.**
 
 The error examples:
 
@@ -27,25 +27,25 @@ You can see the Error Prone documents [here](http://errorprone.info/).
 
 ### Examples
 
-If you want to see grpc-java-api-checker is working with examples, first you should do the local publish.
+To use grpc-java-api-checker, you must first publish it locally. (TODO: update with link to jars on Maven once they are published)
 
 ``` sh
 mvn install
 ```
 
 #### Maven
-The example is [here](examples/maven)
+The example is [here](examples/pom.xml)
 
 ``` sh
-cd examples/maven/
+cd examples/
 mvn compile
 ```
 
 #### Gradle
-The example is [here](examples/gradle)
+The example is [here](examples/build.gradle)
 
 ``` sh
-cd examples/gradle/
+cd examples/
 ./gradlew compileJava
 ```
 

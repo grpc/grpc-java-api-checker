@@ -22,7 +22,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>grpc-java-api-checker</name>
-  <description>An Error Prone plugin that checks for usages of grpc-java APIs.</description>
+  <description>An Error Prone plugin that checks for usages of grpc-java experimental or internal APIs.</description>
   <url>https://github.com/grpc/grpc-java-api-checker</url>
 
   <licenses>

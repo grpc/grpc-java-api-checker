@@ -31,7 +31,7 @@ import javax.lang.model.element.ExecutableElement;
 
 @AutoService(BugChecker.class)
 @BugPattern(
-    name = "ExperimentalApi",
+    name = "GrpcExperimentalApi",
     summary = "@ExperimentalApi should not be used in application code",
     explanation = "@ExperimentalApi should not be used in application code",
     severity = SeverityLevel.ERROR,

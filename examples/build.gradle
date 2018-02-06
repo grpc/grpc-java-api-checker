@@ -21,10 +21,7 @@ repositories {
 }
 
 dependencies {
-    // See: https://github.com/grpc/grpc-java/commit/0c210322216b9509855663a0ee4fc26c5b0e4ec7
-    // If you want to build the grpc-java 1.11.0-SNAPSHOT, see the official documents:
-    // https://github.com/grpc/grpc-java/blob/master/COMPILING.md
-    compile "io.grpc:grpc-core:1.11.0-SNAPSHOT"
+    compile 'io.grpc:grpc-netty:1.10.0'
     apt 'io.grpc:grpc-java-api-checker:1.0-SNAPSHOT'
 }
 
@@ -34,5 +31,5 @@ configurations.errorprone {
 
 compileJava {
     // you can specify the settings
-    options.compilerArgs += ["-XepDisableAllChecks", "-Xep:Internal:ERROR", "-Xep:ExperimentalApi:ERROR"]
+    options.compilerArgs += ["-XepDisableAllChecks", "-Xep:GrpcInternal:ERROR", "-Xep:GrpcExperimentalApi:ERROR"]
 }

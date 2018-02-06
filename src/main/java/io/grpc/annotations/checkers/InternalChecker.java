@@ -27,7 +27,7 @@ import javax.lang.model.element.AnnotationMirror;
 
 @AutoService(BugChecker.class)
 @BugPattern(
-    name = "Internal",
+    name = "GrpcInternal",
     summary = "@Internal should not be used in application code",
     explanation = "@Internal should not be used in application code",
     severity = SeverityLevel.ERROR,

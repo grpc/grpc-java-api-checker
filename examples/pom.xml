@@ -10,7 +10,7 @@
   <dependencies>
     <dependency>
       <groupId>io.grpc</groupId>
-      <artifactId>grpc-netty</artifactId>
+      <artifactId>grpc-core</artifactId>
       <version>1.10.0</version>
     </dependency>
   </dependencies>

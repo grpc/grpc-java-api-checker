@@ -35,15 +35,12 @@ import java.util.Optional;
 import javax.lang.model.element.AnnotationMirror;
 
 abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMatcher,
-    MemberSelectTreeMatcher, CompilationUnitTreeMatcher {
+    MemberSelectTreeMatcher {
 
-  private boolean shouldBeChecked = false;
   private final String annotationType;
-  private final String basePackage;
 
-  AnnotationChecker(String basePackage, String annotationType) {
+  AnnotationChecker(String annotationType) {
     this.annotationType = checkNotNull(annotationType, "annotationType");
-    this.basePackage = checkNotNull(basePackage, "packageName");
   }
 
   /**
@@ -67,7 +64,7 @@ abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMat
    */
   private Description match(Tree tree, VisitorState state) {
     Symbol symbol = ASTHelpers.getSymbol(tree);
-    if (!shouldBeChecked || symbol == null) {
+    if (symbol == null) {
       return NO_MATCH;
     }
     return findAnnotatedApi(symbol)
@@ -85,21 +82,5 @@ abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMat
   @Override
   public Description matchMemberSelect(MemberSelectTree tree, VisitorState state) {
     return match(tree, state);
-  }
-
-  // TODO(jyane): verify order.
-  // Compilation unit tree would be matched first and then other trees would be matched. Really?
-  @Override
-  public Description matchCompilationUnit(CompilationUnitTree tree, VisitorState state) {
-    Tree packageName = tree.getPackageName();
-    if (packageName == null) {
-      return NO_MATCH;
-    }
-    String name = packageName.toString();
-    // package is under the basePackage.
-    if (!(name.equals(basePackage) || name.startsWith(basePackage + "."))) {
-      shouldBeChecked = true;
-    }
-    return NO_MATCH;
   }
 }

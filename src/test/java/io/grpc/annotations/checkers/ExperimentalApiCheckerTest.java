@@ -31,27 +31,6 @@ public class ExperimentalApiCheckerTest {
   public void setUp() {
     compiler = CompilationTestHelper.newInstance(ExperimentalApiChecker.class, getClass());
 
-    // add the @Internal annotation
-    compiler.addSourceLines("io/grpc/Internal.java",
-        "package io.grpc;",
-        "import java.lang.annotation.Documented;",
-        "import java.lang.annotation.ElementType;",
-        "import java.lang.annotation.Retention;",
-        "import java.lang.annotation.RetentionPolicy;",
-        "import java.lang.annotation.Target;",
-        "",
-        "@Internal",
-        "@Retention(RetentionPolicy.CLASS)",
-        "@Target({",
-        "  ElementType.ANNOTATION_TYPE,",
-        "  ElementType.CONSTRUCTOR,",
-        "  ElementType.FIELD,",
-        "  ElementType.METHOD,",
-        "  ElementType.PACKAGE,",
-        "  ElementType.TYPE})",
-        "@Documented",
-        "public @interface Internal {}");
-
     // add the @ExperimentalApi annotation
     compiler.addSourceLines("io/grpc/ExperimentalApi.java",
         "package io.grpc;",
@@ -62,7 +41,6 @@ public class ExperimentalApiCheckerTest {
         "import java.lang.annotation.RetentionPolicy;",
         "import java.lang.annotation.Target;",
         "",
-        "@Internal",
         "@Retention(RetentionPolicy.CLASS)",
         "@Target({",
         "   ElementType.ANNOTATION_TYPE,",
@@ -134,19 +112,6 @@ public class ExperimentalApiCheckerTest {
         .addSourceLines("example/Test.java",
             "package example;",
             "",
-            "public class Test {",
-            "  public static void main(String args[]) {",
-            "    System.out.println(args);",
-            "  }",
-            "}")
-        .doTest();
-  }
-
-  // Test for compilation unit matching
-  @Test
-  public void negativeDefaultPackageCouldEvaluate() {
-    compiler
-        .addSourceLines("Test.java",
             "public class Test {",
             "  public static void main(String args[]) {",
             "    System.out.println(args);",

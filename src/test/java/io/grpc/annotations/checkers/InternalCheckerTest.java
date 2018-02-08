@@ -39,7 +39,6 @@ public class InternalCheckerTest {
         "import java.lang.annotation.RetentionPolicy;",
         "import java.lang.annotation.Target;",
         "",
-        "@Internal",
         "@Retention(RetentionPolicy.CLASS)",
         "@Target({",
         "  ElementType.ANNOTATION_TYPE,",
@@ -109,19 +108,6 @@ public class InternalCheckerTest {
         .addSourceLines("example/Test.java",
             "package example;",
             "",
-            "public class Test {",
-            "  public static void main(String args[]) {",
-            "    System.out.println(args);",
-            "  }",
-            "}")
-        .doTest();
-  }
-
-  // Test for compilation unit matching
-  @Test
-  public void negativeDefaultPackageCouldEvaluate() {
-    compiler
-        .addSourceLines("Test.java",
             "public class Test {",
             "  public static void main(String args[]) {",
             "    System.out.println(args);",

@@ -41,7 +41,7 @@ import javax.lang.model.element.ExecutableElement;
 public final class ExperimentalApiChecker extends AnnotationChecker {
 
   public ExperimentalApiChecker() {
-    super("io.grpc", "io.grpc.ExperimentalApi");
+    super("io.grpc.ExperimentalApi");
   }
 
   private Optional<String> findLink(AnnotationMirror annotation) {

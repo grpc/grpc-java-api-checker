@@ -9,12 +9,12 @@ An Error Prone plugin that checks for usages of grpc-java APIs that are annotate
 The error examples:
 
 ```
-src/main/java/com/example/App.java:10: error: [Internal] @Internal should not be used in application code
+src/main/java/com/example/App.java:10: error: [GrpcInternal] @Internal should not be used in application code
     System.out.println(InternalStatus.MESSAGE_KEY);
                        ^
     (see https://github.com/grpc/grpc-java)
 
-src/main/java/com/example/App.java:11: error: [ExperimentalApi] @ExperimentalApi should not be used in application code
+src/main/java/com/example/App.java:11: error: [GrpcExperimentalApi] @ExperimentalApi should not be used in application code
     System.out.println(Grpc.TRANSPORT_ATTR_REMOTE_ADDR);
                            ^
     (see "https://github.com/grpc/grpc-java/issues/1710")

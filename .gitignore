@@ -1,0 +1,22 @@
+# intellij
+.idea/
+*.iml
+
+# maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# gradle
+.gradle
+examples/.gradle
+examples/build/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache

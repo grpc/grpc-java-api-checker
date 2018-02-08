@@ -44,22 +44,22 @@ public final class ExperimentalApiChecker extends AnnotationChecker {
     super("io.grpc.ExperimentalApi");
   }
 
-  private Optional<String> findLink(AnnotationMirror annotation) {
+  private String findLink(AnnotationMirror annotation) {
     // Currently, @ExperimentalApi may have a link.
     for (Entry<? extends ExecutableElement, ? extends AnnotationValue> entry : annotation
         .getElementValues().entrySet()) {
-      return Optional.of(entry.getValue().toString());
+      return entry.getValue().toString();
     }
-    return Optional.empty();
+    return null;
   }
 
   @Override
   protected Description describe(Tree tree, AnnotationMirror annotation) {
-    String link = findLink(annotation).orElse(this.linkUrl());
+    String link = findLink(annotation);
     return Description.builder(
         tree,
         this.canonicalName(),
-        link,
+        link == null ? this.linkUrl() : link,
         this.defaultSeverity(),
         this.message())
         .build();

@@ -46,13 +46,13 @@ abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMat
   /**
    * Returns true if api is annotated.
    */
-  private Optional<AnnotationMirror> findAnnotatedApi(Symbol symbol) {
+  private AnnotationMirror findAnnotatedApi(Symbol symbol) {
     if (symbol == null) {
-      return Optional.empty();
+      return null;
     }
     for (AnnotationMirror annotation : symbol.getAnnotationMirrors()) {
       if (annotation.getAnnotationType().toString().equals(annotationType)) {
-        return Optional.of(annotation);
+        return annotation;
       }
     }
     // recursive
@@ -67,9 +67,11 @@ abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMat
     if (symbol == null) {
       return NO_MATCH;
     }
-    return findAnnotatedApi(symbol)
-        .map(x -> describe(tree, x))
-        .orElse(NO_MATCH);
+    AnnotationMirror annotation = findAnnotatedApi(symbol);
+    if (annotation == null) {
+      return NO_MATCH;
+    }
+    return describe(tree, annotation);
   }
 
   protected abstract Description describe(Tree tree, AnnotationMirror annotation);

@@ -41,7 +41,7 @@ abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMat
   }
 
   /**
-   * Returns true if api is annotated.
+   * Returns non-null if api is annotated.
    */
   private AnnotationMirror findAnnotatedApi(Symbol symbol) {
     if (symbol == null) {

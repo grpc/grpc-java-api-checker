@@ -1,0 +1,17 @@
+workspace(name = "example")
+
+http_archive(
+    name = "grpc_java",
+    strip_prefix = "grpc-java-1.10.0",
+    urls = ["https://github.com/grpc/grpc-java/archive/v1.10.0.zip"],
+)
+
+load("@grpc_java//:repositories.bzl", "grpc_java_repositories")
+
+grpc_java_repositories()
+
+maven_jar(
+    name = "io_grpc_grpc_java_api_checker",
+    artifact = "io.grpc:grpc-java-api-checker:1.0.0",
+    sha1 = "68fe2fc82e1f673b042fb7192a3724d1464d0582",
+)

@@ -27,12 +27,6 @@ You can see the Error Prone documents [here](http://errorprone.info/).
 
 ### Examples
 
-To use grpc-java-api-checker, you must first publish it locally. (TODO: update with link to jars on Maven once they are published)
-
-``` sh
-mvn install
-```
-
 #### Maven
 The example is [here](examples/pom.xml)
 

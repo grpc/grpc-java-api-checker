@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.grpc.annotations.checkers;
+package io.grpc.tools.checkers;
 
 import com.google.auto.service.AutoService;
 import com.google.errorprone.BugPattern;

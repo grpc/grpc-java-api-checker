@@ -28,7 +28,7 @@
           <target>1.8</target>
           <annotationProcessorPaths>
             <path>
-              <groupId>io.grpc</groupId>
+              <groupId>io.grpc.tools</groupId>
               <artifactId>grpc-java-api-checker</artifactId>
               <version>1.0-SNAPSHOT</version>
             </path>

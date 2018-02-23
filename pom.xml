@@ -54,8 +54,12 @@
 
   <developers>
     <developer>
-      <id>grpc</id>
-      <name>gRPC Authors</name>
+      <id>grpc.io</id>
+      <name>gRPC Contributors</name>
+      <email>grpc-io@googlegroups.com</email>
+      <url>https://grpc.io/</url>
+      <organization>gRPC Authors</organization>
+      <organizationUrl>https://www.google.com</organizationUrl>
     </developer>
   </developers>
 

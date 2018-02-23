@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.grpc.annotations.checkers;
+package io.grpc.tools.checkers;
 
 import com.google.errorprone.CompilationTestHelper;
 import org.junit.Before;
@@ -23,18 +23,16 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
-public class ExperimentalApiCheckerTest {
-
+public class InternalCheckerTest {
   private CompilationTestHelper compiler;
 
   @Before
   public void setUp() {
-    compiler = CompilationTestHelper.newInstance(ExperimentalApiChecker.class, getClass());
+    compiler = CompilationTestHelper.newInstance(InternalChecker.class, getClass());
 
-    // add the @ExperimentalApi annotation
-    compiler.addSourceLines("io/grpc/ExperimentalApi.java",
+    // add the @Internal annotation
+    compiler.addSourceLines("io/grpc/Internal.java",
         "package io.grpc;",
-        "",
         "import java.lang.annotation.Documented;",
         "import java.lang.annotation.ElementType;",
         "import java.lang.annotation.Retention;",
@@ -43,24 +41,22 @@ public class ExperimentalApiCheckerTest {
         "",
         "@Retention(RetentionPolicy.CLASS)",
         "@Target({",
-        "   ElementType.ANNOTATION_TYPE,",
-        "   ElementType.CONSTRUCTOR,",
-        "   ElementType.FIELD,",
-        "   ElementType.METHOD,",
-        "   ElementType.PACKAGE,",
-        "   ElementType.TYPE})",
+        "  ElementType.ANNOTATION_TYPE,",
+        "  ElementType.CONSTRUCTOR,",
+        "  ElementType.FIELD,",
+        "  ElementType.METHOD,",
+        "  ElementType.PACKAGE,",
+        "  ElementType.TYPE})",
         "@Documented",
-        "public @interface ExperimentalApi {",
-        "  String value() default \"\";",
-        "}");
+        "public @interface Internal {}");
 
     // add an annotated class
     compiler.addSourceLines("io/grpc/AnnotatedClass.java",
         "package io.grpc;",
         "",
-        "import io.grpc.ExperimentalApi;",
+        "import io.grpc.Internal;",
         "",
-        "@ExperimentalApi(\"https://example.com/issue\")",
+        "@Internal",
         "public class AnnotatedClass {",
         "  public static final int MEMBER = 42;",
         "  public static int foo() { return 42; }",
@@ -78,20 +74,20 @@ public class ExperimentalApiCheckerTest {
     compiler.addSourceLines("io/grpc/AnnotatedMember.java",
         "package io.grpc;",
         "",
-        "import io.grpc.ExperimentalApi;",
+        "import io.grpc.Internal;",
         "",
         "public class AnnotatedMember {",
-        "  @ExperimentalApi",
+        "  @Internal",
         "  public void instanceMethod() {}",
         "",
-        "  @ExperimentalApi",
+        "  @Internal",
         "  public static int MEMBER = 42;",
         "",
-        "  @ExperimentalApi",
+        "  @Internal",
         "  public static void staticMethod() {};",
         "",
         "",
-        "  @ExperimentalApi",
+        "  @Internal",
         "  public final int member = 42;",
         "}");
 
@@ -99,9 +95,9 @@ public class ExperimentalApiCheckerTest {
     compiler.addSourceLines("io/grpc/IAnnotated.java",
         "package io.grpc;",
         "",
-        "import io.grpc.ExperimentalApi;",
+        "import io.grpc.Internal;",
         "",
-        "@ExperimentalApi",
+        "@Internal",
         "public interface IAnnotated {",
         "}");
   }
@@ -155,7 +151,7 @@ public class ExperimentalApiCheckerTest {
   }
 
   @Test
-  public void positiveInstantiationAndCaptureDescriptionLinkUrl() {
+  public void positiveInstantiation() {
     compiler
         .addSourceLines("example/Test.java",
             "package example;",
@@ -165,7 +161,7 @@ public class ExperimentalApiCheckerTest {
             "",
             "public class Test {",
             "  public static void main(String[] args) {",
-            "    // BUG: Diagnostic contains: https://example.com/issue",
+            "    // BUG: Diagnostic contains: ",
             "    new AnnotatedClass();",
             "  }",
             "}")

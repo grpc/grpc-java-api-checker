@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.grpc.tools.checkers;
+package io.grpc.annotations.checkers;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.errorprone.matchers.Description.NO_MATCH;

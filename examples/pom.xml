@@ -30,7 +30,7 @@
             <path>
               <groupId>io.grpc</groupId>
               <artifactId>grpc-java-api-checker</artifactId>
-              <version>1.0-SNAPSHOT</version>
+              <version>1.0.0</version>
             </path>
           </annotationProcessorPaths>
           <!-- You can specify the settings -->

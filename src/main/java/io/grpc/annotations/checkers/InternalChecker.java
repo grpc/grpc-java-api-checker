@@ -38,6 +38,7 @@ public final class InternalChecker extends AnnotationChecker {
 
   public InternalChecker() {
     super("io.grpc.Internal");
+    checkTopOfMethodHierarchy = true;
   }
 
   @Override

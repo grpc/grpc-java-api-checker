@@ -29,12 +29,19 @@ import com.sun.source.tree.IdentifierTree;
 import com.sun.source.tree.MemberSelectTree;
 import com.sun.source.tree.Tree;
 import com.sun.tools.javac.code.Symbol;
+import com.sun.tools.javac.code.Symbol.MethodSymbol;
 import javax.lang.model.element.AnnotationMirror;
+import java.util.Set;
 
 abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMatcher,
     MemberSelectTreeMatcher {
 
   private final String annotationType;
+
+  // When this is set to true, method calls will look for an annotation on the top-level method
+  // declaration. This is used to avoid io.grpc.internal implementations "hiding" publicly declared
+  // API methods.
+  protected boolean checkTopOfMethodHierarchy = false;
 
   AnnotationChecker(String annotationType) {
     this.annotationType = checkNotNull(annotationType, "annotationType");
@@ -63,6 +70,15 @@ abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMat
     Symbol symbol = ASTHelpers.getSymbol(tree);
     if (symbol == null) {
       return NO_MATCH;
+    }
+    if (checkTopOfMethodHierarchy && symbol instanceof MethodSymbol) {
+      // Returns an ordered LinkedHashSet
+      Set<MethodSymbol> superMethods =
+          ASTHelpers.findSuperMethods((MethodSymbol) symbol, state.getTypes());
+      for (MethodSymbol superMethod : superMethods) {
+        // The last method in the set will be the top-level declaration
+        symbol = superMethod;
+      }
     }
     AnnotationMirror annotation = findAnnotatedApi(symbol);
     if (annotation == null) {

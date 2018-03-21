@@ -43,6 +43,14 @@ cd examples/
 ./gradlew compileJava
 ```
 
+#### Bazel
+The example is [here](examples/BUILD.bazel)
+
+``` sh
+cd examples/
+bazel build //...
+```
+
 ## Build and Test
 
 ``` sh

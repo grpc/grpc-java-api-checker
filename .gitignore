@@ -20,3 +20,10 @@ examples/build/
 gradle-app.setting
 !gradle-wrapper.jar
 .gradletasknamecache
+
+# bazel
+bazel-bin
+bazel-examples
+bazel-genfiles
+bazel-out
+bazel-testlogs

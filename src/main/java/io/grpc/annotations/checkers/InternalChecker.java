@@ -37,7 +37,7 @@ import javax.lang.model.element.AnnotationMirror;
 public final class InternalChecker extends AnnotationChecker {
 
   public InternalChecker() {
-    super("io.grpc.Internal");
+    super("io.grpc.Internal", true);
   }
 
   @Override

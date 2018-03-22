@@ -29,15 +29,27 @@ import com.sun.source.tree.IdentifierTree;
 import com.sun.source.tree.MemberSelectTree;
 import com.sun.source.tree.Tree;
 import com.sun.tools.javac.code.Symbol;
+import com.sun.tools.javac.code.Symbol.MethodSymbol;
 import javax.lang.model.element.AnnotationMirror;
+import java.util.Set;
 
 abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMatcher,
     MemberSelectTreeMatcher {
 
   private final String annotationType;
 
+  // When this is set to true, method calls will only match the annotation if all members of the
+  // method hierarchy are annotated. This is used to avoid io.grpc.internal implementations
+  // "hiding" publicly declared API methods.
+  private final boolean requireAnnotationOnMethodHierarchy;
+
   AnnotationChecker(String annotationType) {
+    this(annotationType, false);
+  }
+
+  AnnotationChecker(String annotationType, boolean requireAnnotationOnMethodHierarchy) {
     this.annotationType = checkNotNull(annotationType, "annotationType");
+    this.requireAnnotationOnMethodHierarchy = requireAnnotationOnMethodHierarchy;
   }
 
   /**
@@ -67,6 +79,16 @@ abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMat
     AnnotationMirror annotation = findAnnotatedApi(symbol);
     if (annotation == null) {
       return NO_MATCH;
+    }
+    if (requireAnnotationOnMethodHierarchy && symbol instanceof MethodSymbol) {
+      Set<MethodSymbol> superMethods =
+              ASTHelpers.findSuperMethods((MethodSymbol) symbol, state.getTypes());
+      for (MethodSymbol superMethod : superMethods) {
+        AnnotationMirror superAnnotation = findAnnotatedApi(superMethod);
+        if (superAnnotation == null) {
+          return NO_MATCH;
+        }
+      }
     }
     return describe(tree, annotation);
   }

@@ -22,7 +22,7 @@ repositories {
 
 dependencies {
     compile 'io.grpc:grpc-core:1.10.0'
-    apt 'io.grpc:grpc-java-api-checker:1.0.0'
+    apt 'io.grpc:grpc-java-api-checker:1.1.0'
 }
 
 configurations.errorprone {

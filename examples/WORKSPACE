@@ -12,6 +12,6 @@ grpc_java_repositories()
 
 maven_jar(
     name = "io_grpc_grpc_java_api_checker",
-    artifact = "io.grpc:grpc-java-api-checker:1.0.0",
+    artifact = "io.grpc:grpc-java-api-checker:1.1.0",
     sha1 = "68fe2fc82e1f673b042fb7192a3724d1464d0582",
 )

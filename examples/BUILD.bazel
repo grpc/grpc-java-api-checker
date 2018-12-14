@@ -2,7 +2,7 @@ java_library(
     name = "example",
     srcs = glob(["src/main/java/com/example/*.java"]),
     deps = [
-      "@grpc_java//core",
+      "@io_grpc_grpc_java//core",
     ],
     plugins = [
       ":io_grpc_grpc_java_api_checker_plugin",

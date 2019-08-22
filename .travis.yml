@@ -2,6 +2,9 @@ language: java
 
 sudo: false
 
+before_install:
+  - rm ~/.m2/settings.xml || true # Avoid repository.apache.org, which has QPS limits and is useless
+
 cache:
   directories:
   - "$HOME/.m2"

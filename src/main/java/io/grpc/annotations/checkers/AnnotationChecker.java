@@ -16,7 +16,6 @@
 
 package io.grpc.annotations.checkers;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.errorprone.matchers.Description.NO_MATCH;
 
 import com.google.errorprone.VisitorState;
@@ -48,7 +47,10 @@ abstract class AnnotationChecker extends BugChecker implements IdentifierTreeMat
   }
 
   AnnotationChecker(String annotationType, boolean requireAnnotationOnMethodHierarchy) {
-    this.annotationType = checkNotNull(annotationType, "annotationType");
+    if (annotationType == null) {
+      throw new NullPointerException("annotationType");
+    }
+    this.annotationType = annotationType;
     this.requireAnnotationOnMethodHierarchy = requireAnnotationOnMethodHierarchy;
   }
 

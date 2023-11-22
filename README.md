@@ -1,6 +1,6 @@
 # grpc-java-api-checker
 
-[![Build Status](https://travis-ci.org/grpc/grpc-java-api-checker.svg?branch=master)](https://travis-ci.org/grpc/grpc-java-api-checker)
+[![GitHub Actions Testing](https://github.com/grpc/grpc-java-api-checker/actions/workflows/testing.yml/badge.svg)](https://github.com/grpc/grpc-java-api-checker/actions/workflows/testing.yml)
 
 An Error Prone plugin that checks for usages of grpc-java APIs that are annotated with `@ExperimentalApi` or `@Internal`.
 

@@ -1,6 +1,6 @@
 # grpc-java-api-checker
 
-[![GitHub Actions Testing](https://github.com/grpc/grpc-java-api-checker/actions/workflows/testing.yml/badge.svg)](https://github.com/grpc/grpc-java-api-checker/actions/workflows/testing.yml)
+[![GitHub Actions Testing](https://github.com/grpc/grpc-java-api-checker/actions/workflows/testing.yml/badge.svg)](https://github.com/grpc/grpc-java-api-checker/actions/workflows/testing.yml?branch=master)
 
 An Error Prone plugin that checks for usages of grpc-java APIs that are annotated with `@ExperimentalApi` or `@Internal`.
 

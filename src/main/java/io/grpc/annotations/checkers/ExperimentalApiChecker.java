@@ -55,12 +55,10 @@ public final class ExperimentalApiChecker extends AnnotationChecker {
   @Override
   protected Description describe(Tree tree, AnnotationMirror annotation) {
     String link = findLink(annotation);
-    return Description.builder(
-        tree,
-        this.canonicalName(),
-        link == null ? this.linkUrl() : link,
-        this.defaultSeverity(),
-        this.message())
-        .build();
+    Description.Builder builder = buildDescription(tree);
+    if (link != null) {
+      builder.setLinkUrl(link);
+    }
+    return builder.build();
   }
 }

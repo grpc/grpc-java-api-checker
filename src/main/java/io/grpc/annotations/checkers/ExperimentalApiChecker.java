@@ -59,7 +59,6 @@ public final class ExperimentalApiChecker extends AnnotationChecker {
         tree,
         this.canonicalName(),
         link == null ? this.linkUrl() : link,
-        this.defaultSeverity(),
         this.message())
         .build();
   }

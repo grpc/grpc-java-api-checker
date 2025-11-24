@@ -11,7 +11,7 @@
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-core</artifactId>
-      <version>1.17.1</version>
+      <version>1.76.0</version>
     </dependency>
   </dependencies>
 
@@ -20,36 +20,40 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
+        <version>3.14.1</version>
         <configuration>
           <compilerId>javac-with-errorprone</compilerId>
-          <forceJavacCompilerUse>true</forceJavacCompilerUse>
-          <source>1.8</source>
-          <target>1.8</target>
+          <forceLegacyJavacApi>true</forceLegacyJavacApi>
+          <release>17</release>
           <annotationProcessorPaths>
             <path>
               <groupId>io.grpc</groupId>
               <artifactId>grpc-java-api-checker</artifactId>
-              <version>1.1.0</version>
+              <version>2.0.0-SNAPSHOT</version>
+            </path>
+            <path>
+              <groupId>com.google.errorprone</groupId>
+              <artifactId>error_prone_core</artifactId>
+              <version>2.39.0</version>
             </path>
           </annotationProcessorPaths>
           <!-- You can specify the settings -->
           <compilerArgs>
-            <arg>-XepDisableAllChecks</arg>
-            <arg>-Xep:GrpcInternal:ERROR</arg>
-            <arg>-Xep:GrpcExperimentalApi:ERROR</arg>
+            <arg>-XDcompilePolicy=simple</arg>
+            <arg>--should-stop=ifError=FLOW</arg>
+            <arg>-Xplugin:ErrorProne -XepAllErrorsAsWarnings</arg>
           </compilerArgs>
         </configuration>
         <dependencies>
           <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-compiler-javac-errorprone</artifactId>
-            <version>2.5</version>
-          </dependency>
-          <dependency>
             <groupId>com.google.errorprone</groupId>
             <artifactId>error_prone_core</artifactId>
-            <version>2.3.2</version>
+            <version>2.39.0</version>
+          </dependency>
+          <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-compiler-javac-errorprone</artifactId>
+            <version>2.15.0</version>
           </dependency>
         </dependencies>
       </plugin>
